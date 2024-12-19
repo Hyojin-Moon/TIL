@@ -30,21 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
         menuContainer.appendChild(menuItem);
     });
 
+
     // 메뉴 클릭 이벤트
     menuContainer.addEventListener('click', (event) => {
+        // 메뉴 컨테이너 영역에서 클릭 이벤트를 감지
         if (event.target.tagName === 'BUTTON') {
+             // 클릭된 요소가 버튼인지 확인 (다른 요소 클릭 시 무시)
             const index = event.target.getAttribute('data-index');
+            // 클릭된 버튼의 'data-index' 값을 가져와 저장
             const selectedItem = menu[index];
-        
+            // 'menu' 배열에서 해당 인덱스에 해당하는 메뉴 아이템을 선택
             if (!order[selectedItem.name]) {
+                // 선택된 아이템이 이미 주문 내역에 있는지 확인
                 order[selectedItem.name] = { ...selectedItem, quantity: 1 };
-            
+                // 없다면 새로 추가하고, 가격과 초기 수량(1)을 설정
             } else {
                 order[selectedItem.name].quantity++;
-            }
+            }   //이미 있으면 수량(quantity)을 1 증가
             
             totalPrice += selectedItem.price;
+            //총 가격에 선택된 아이템의 가격을 더함
             updateOrderList();
+            // 주문 내역 업데이트하는 함수 호출
         }
     });
 
@@ -54,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let itemName in order) {
             const orderItem = order[itemName];
             const orderItemElement = document.createElement('li');
-            orderItemElement.className = 'list-item'; //문효진 추가
+            orderItemElement.className = 'list-item'; //css 구분을 위해 추가 _문효진
             orderItemElement.innerHTML = `
                 ${itemName} - ₩${orderItem.price.toLocaleString()} x${orderItem.quantity}
                 <button class="remove" data-item="${itemName}">삭제</button>
