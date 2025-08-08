@@ -2,19 +2,19 @@
 
 
 ```ts
-fetchUser(params?: userRequest){
-  return axios.get<userResponse>(URLservice.API('/v1/user'),{
+// requestFilter를 타는 일반 API
+fetchUser(params?: userRequest) {
+  return axios.get<userResponse>(URLservice.API('/v1/user'), {
     params,
   });
-};
+}
 
-
-$fetchUser(params?: userRequest){
-  return axios.get<userResponse>(URLservice.API('/v1/user'),{
+// requestFilter를 타지 않는 API (ex. 인증 필터 우회 등)
+$fetchUser(params?: userRequest) {
+  return axios.get<userResponse>(URLservice.API('/v1/user'), {
     params,
   });
-};
-```
+}
 
 ---
 
